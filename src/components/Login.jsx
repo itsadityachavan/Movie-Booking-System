@@ -27,7 +27,7 @@ export default function Login() {
             localStorage.setItem("username", username);
 
             // Go to Home
-            navigate("/");
+            navigate("/home");
 
         } else {
 
@@ -233,7 +233,7 @@ export default function Login() {
 
                         <button
                             className="btn btn-link text-muted text-decoration-none"
-                            onClick={() => navigate("/")}
+                            onClick={() => navigate("/home")}
                         >
 
                             <i className="bi bi-arrow-left me-1"></i>

@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Movies from "./pages/Movies";
 import Shows from "./pages/Shows";
@@ -6,7 +6,7 @@ import Seats from "./pages/Seats";
 import BookingConfirmation from "./pages/BookingConfirmation.jsx";
 import MyBookings from "./pages/MyBookings";
 import Login from "./components/Login";
-import Register from "./components/Register";
+
 
 function Home() {
     return (
@@ -36,23 +36,23 @@ export default function App() {
 
             <Routes>
 
-                <Route path="/" element={<Home />} />
+                <Route path="/" element={<Navigate to="/login" />} />
+
+                <Route path="/login" element={<Login />} />
+
+                <Route path="/home" element={<Home />} />
 
                 <Route path="/movies" element={<Movies />} />
 
                 <Route path="/bookings" element={<Bookings />} />
 
-                <Route path="/shows/:movieId" element={<Shows />}/>
+                <Route path="/shows/:movieId" element={<Shows />} />
 
-                <Route path="/seats/:showId" element={<Seats />}/>
+                <Route path="/seats/:showId" element={<Seats />} />
 
-                <Route path="/booking-confirmation" element={<BookingConfirmation />}/>
+                <Route path="/booking-confirmation" element={<BookingConfirmation />} />
 
                 <Route path="/my-bookings" element={<MyBookings />} />
-
-                <Route path="/login" element={<Login />} />
-
-                <Route path="/register" element={<Register />} />
 
             </Routes>
 
