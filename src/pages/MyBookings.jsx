@@ -11,9 +11,9 @@ export default function MyBookings() {
     const [cancellingId, setCancellingId] = useState(null);
 
 
-    // -----------------------------------------
-    // Load Bookings
-    // -----------------------------------------
+    // =====================================================
+    // LOAD BOOKINGS
+    // =====================================================
 
     useEffect(() => {
 
@@ -31,7 +31,6 @@ export default function MyBookings() {
             );
 
             console.log("BOOKINGS DATA:", response.data);
-
 
             const bookingData = await Promise.all(
 
@@ -107,6 +106,7 @@ export default function MyBookings() {
                                             );
 
                                             return bookingSeat;
+
                                         }
 
                                     }
@@ -153,7 +153,6 @@ export default function MyBookings() {
                 bookingData
             );
 
-
             setBookings(bookingData);
 
         } catch (error) {
@@ -172,9 +171,9 @@ export default function MyBookings() {
     };
 
 
-    // -----------------------------------------
-    // Cancel Booking
-    // -----------------------------------------
+    // =====================================================
+    // CANCEL BOOKING
+    // =====================================================
 
     const handleCancelBooking = async (bookingId) => {
 
@@ -183,7 +182,9 @@ export default function MyBookings() {
         );
 
         if (!confirmCancel) {
+
             return;
+
         }
 
 
@@ -255,25 +256,45 @@ export default function MyBookings() {
     };
 
 
-    // -----------------------------------------
-    // Loading
-    // -----------------------------------------
+    // =====================================================
+    // LOADING
+    // =====================================================
 
     if (loading) {
 
         return (
 
-            <div className="container mt-5 text-center">
+            <div
+                style={{
+                    minHeight: "100vh",
+                    background: "#f8fafc"
+                }}
+                className="d-flex justify-content-center align-items-center"
+            >
 
-                <div
-                    className="spinner-border text-primary"
-                    role="status"
-                >
+                <div className="text-center">
+
+                    <div
+                        className="spinner-border"
+                        style={{
+                            color: "#dc2626",
+                            width: "2.8rem",
+                            height: "2.8rem"
+                        }}
+                        role="status"
+                    >
+                    </div>
+
+                    <p
+                        className="mt-3 mb-0"
+                        style={{
+                            color: "#64748b"
+                        }}
+                    >
+                        Loading your bookings...
+                    </p>
+
                 </div>
-
-                <p className="mt-3 text-muted">
-                    Loading your bookings...
-                </p>
 
             </div>
 
@@ -282,49 +303,81 @@ export default function MyBookings() {
     }
 
 
-    // -----------------------------------------
-    // No Bookings
-    // -----------------------------------------
+    // =====================================================
+    // NO BOOKINGS
+    // =====================================================
 
     if (bookings.length === 0) {
 
         return (
 
-            <div className="container mt-5 text-center">
+            <div
+                style={{
+                    minHeight: "100vh",
+                    background: "#f8fafc",
+                    paddingTop: "70px"
+                }}
+            >
 
-                <div
-                    className="card border-0 shadow-sm p-5"
-                    style={{
-                        borderRadius: "18px"
-                    }}
-                >
+                <div className="container">
 
-                    <div
-                        style={{
-                            fontSize: "55px"
-                        }}
-                    >
-                        🎟️
+                    <div className="text-center">
+
+                        <div
+                            className="mx-auto d-flex justify-content-center align-items-center"
+                            style={{
+                                width: "85px",
+                                height: "85px",
+                                borderRadius: "50%",
+                                background: "#fee2e2",
+                                color: "#dc2626",
+                                fontSize: "38px"
+                            }}
+                        >
+
+                            <i className="bi bi-ticket-perforated"></i>
+
+                        </div>
+
+
+                        <h2
+                            className="fw-bold mt-4"
+                            style={{
+                                color: "#1e293b"
+                            }}
+                        >
+                            No Bookings Yet
+                        </h2>
+
+
+                        <p
+                            className="mb-4"
+                            style={{
+                                color: "#64748b"
+                            }}
+                        >
+                            You haven't booked any movie tickets yet.
+                        </p>
+
+
+                        <button
+                            className="btn px-4 py-2 fw-semibold"
+                            style={{
+                                background: "#dc2626",
+                                color: "white",
+                                borderRadius: "8px",
+                                border: "none"
+                            }}
+                            onClick={() => navigate("/movies")}
+                        >
+
+                            <i className="bi bi-film me-2"></i>
+
+                            Browse Movies
+
+                        </button>
+
                     </div>
-
-                    <h3 className="fw-bold mt-3">
-                        No Bookings Yet
-                    </h3>
-
-                    <p className="text-muted">
-                        You haven't booked any movie tickets yet.
-                    </p>
-
-                    <button
-                        className="btn btn-primary px-4 mt-2"
-                        onClick={() => navigate("/movies")}
-                    >
-
-                        <i className="bi bi-film me-2"></i>
-
-                        Browse Movies
-
-                    </button>
 
                 </div>
 
@@ -335,99 +388,170 @@ export default function MyBookings() {
     }
 
 
-    // -----------------------------------------
-    // My Bookings UI
-    // -----------------------------------------
+    // =====================================================
+    // MAIN PAGE
+    // =====================================================
 
     return (
 
-        <div className="container mt-5 mb-5">
+        <div
+            style={{
+                minHeight: "100vh",
+                background: "#f8fafc",
+                paddingTop: "45px",
+                paddingBottom: "70px"
+            }}
+        >
+
+            <div className="container">
 
 
-            {/* Page Header */}
+                {/* =================================================
+                    PAGE HEADER
+                ================================================= */}
 
-            <div className="text-center mb-5">
+                <div className="text-center mb-5">
 
-                <h2 className="fw-bold">
-                    🎟️ My Bookings
-                </h2>
+                    <span
+                        className="badge px-3 py-2 mb-3"
+                        style={{
+                            background: "#fee2e2",
+                            color: "#dc2626",
+                            fontSize: "12px",
+                            letterSpacing: "1px",
+                            borderRadius: "20px"
+                        }}
+                    >
 
-                <p className="text-muted">
-                    View and manage your movie tickets
-                </p>
+                        YOUR TICKETS
 
-            </div>
-
-
-            {/* Booking Cards */}
-
-            <div className="row justify-content-center">
-
-                <div className="col-lg-10">
-
-
-                    {bookings.map((booking) => {
-
-                        const isConfirmed =
-                            booking.bookingStatus === "CONFIRMED";
-
-                        const seatNames =
-                            booking.bookingSeats?.length > 0
-
-                                ? booking.bookingSeats
-                                    .map(
-                                        (bookingSeat) =>
-                                            bookingSeat.seat?.seatNumber
-                                    )
-                                    .filter(Boolean)
-
-                                : [];
+                    </span>
 
 
-                        return (
+                    <h1
+                        className="fw-bold mb-2"
+                        style={{
+                            color: "#1e293b",
+                            fontSize: "36px"
+                        }}
+                    >
 
-                            <div
-                                className="card border-0 shadow-sm mb-4 overflow-hidden"
-                                key={booking.bookingId}
-                                style={{
-                                    borderRadius: "18px"
-                                }}
-                            >
+                        🎟️ My Bookings
+
+                    </h1>
 
 
-                                {/* Top Header */}
+                    <p
+                        className="mb-0"
+                        style={{
+                            color: "#64748b"
+                        }}
+                    >
+
+                        View and manage your movie tickets
+
+                    </p>
+
+                </div>
+
+
+                {/* =================================================
+                    BOOKINGS
+                ================================================= */}
+
+                <div className="row justify-content-center">
+
+                    <div className="col-xl-10 col-lg-11">
+
+                        {bookings.map((booking) => {
+
+                            const isConfirmed =
+                                booking.bookingStatus === "CONFIRMED";
+
+
+                            const seatNames =
+                                booking.bookingSeats?.length > 0
+
+                                    ? booking.bookingSeats
+                                        .map(
+                                            (bookingSeat) =>
+                                                bookingSeat.seat?.seatNumber
+                                        )
+                                        .filter(Boolean)
+
+                                    : [];
+
+
+                            return (
 
                                 <div
-                                    className={`px-4 py-3 ${
-                                        isConfirmed
-                                            ? "bg-primary"
-                                            : "bg-secondary"
-                                    } text-white`}
+                                    key={booking.bookingId}
+                                    className="mb-4"
+                                    style={{
+                                        background: "white",
+                                        borderRadius: "16px",
+                                        border: "1px solid #e2e8f0",
+                                        boxShadow:
+                                            "0 4px 15px rgba(15,23,42,0.06)",
+                                        overflow: "hidden"
+                                    }}
                                 >
 
-                                    <div className="d-flex justify-content-between align-items-center">
+
+                                    {/* =================================================
+                                        BOOKING TOP BAR
+                                    ================================================= */}
+
+                                    <div
+                                        className="px-4 py-3 d-flex justify-content-between align-items-center flex-wrap gap-2"
+                                        style={{
+                                            background: isConfirmed
+                                                ? "#f8fafc"
+                                                : "#fef2f2",
+                                            borderBottom:
+                                                "1px solid #e2e8f0"
+                                        }}
+                                    >
 
                                         <div>
 
-                                            <small className="opacity-75">
-                                                Booking
+                                            <small
+                                                style={{
+                                                    color: "#94a3b8",
+                                                    fontSize: "11px",
+                                                    letterSpacing: "0.8px"
+                                                }}
+                                            >
+                                                BOOKING ID
                                             </small>
 
-                                            <h5 className="mb-0 fw-bold">
+                                            <div
+                                                className="fw-bold"
+                                                style={{
+                                                    color: "#334155"
+                                                }}
+                                            >
 
                                                 #{booking.bookingId}
 
-                                            </h5>
+                                            </div>
 
                                         </div>
 
 
                                         <span
-                                            className={`badge ${
-                                                isConfirmed
-                                                    ? "bg-success"
-                                                    : "bg-danger"
-                                            } px-3 py-2`}
+                                            className="px-3 py-2"
+                                            style={{
+                                                background: isConfirmed
+                                                    ? "#dcfce7"
+                                                    : "#fee2e2",
+                                                color: isConfirmed
+                                                    ? "#15803d"
+                                                    : "#dc2626",
+                                                borderRadius: "20px",
+                                                fontSize: "13px",
+                                                fontWeight: "600"
+                                            }}
                                         >
 
                                             <i
@@ -444,166 +568,550 @@ export default function MyBookings() {
 
                                     </div>
 
-                                </div>
+
+                                    {/* =================================================
+                                        CARD CONTENT
+                                    ================================================= */}
+
+                                    <div className="p-4">
 
 
-                                {/* Card Body */}
+                                        {/* MOVIE */}
 
-                                <div className="card-body p-4">
+                                        <div className="mb-4">
 
+                                            <h3
+                                                className="fw-bold mb-1"
+                                                style={{
+                                                    color: "#1e293b"
+                                                }}
+                                            >
 
-                                    {/* Movie */}
+                                                🎬{" "}
 
-                                    <div className="mb-4">
+                                                {booking.movie?.title ||
+                                                    "Movie unavailable"}
 
-                                        <h3 className="fw-bold mb-1">
-
-                                            🎬 {booking.movie?.title ||
-                                                "Movie unavailable"}
-
-                                        </h3>
-
-                                        {booking.movie && (
-
-                                            <span className="text-muted">
-
-                                                {booking.movie.language}
-                                                {" • "}
-                                                {booking.movie.genre}
-
-                                            </span>
-
-                                        )}
-
-                                    </div>
+                                            </h3>
 
 
-                                    {/* Information Grid */}
+                                            {booking.movie && (
 
-                                    <div className="row g-3">
+                                                <div
+                                                    style={{
+                                                        color: "#64748b",
+                                                        fontSize: "14px"
+                                                    }}
+                                                >
 
+                                                    {booking.movie.language}
 
-                                        {/* Theatre */}
+                                                    {" • "}
 
-                                        <div className="col-md-6">
+                                                    {booking.movie.genre}
 
-                                            <div className="bg-light rounded p-3 h-100">
+                                                </div>
 
-                                                <small className="text-muted d-block mb-1">
-
-                                                    <i className="bi bi-building me-2"></i>
-
-                                                    Theatre
-
-                                                </small>
-
-                                                <strong>
-
-                                                    {booking.theatre?.name ||
-                                                        "Unavailable"}
-
-                                                </strong>
-
-                                            </div>
+                                            )}
 
                                         </div>
 
 
-                                        {/* Location */}
+                                        {/* =================================================
+                                            DETAILS
+                                        ================================================= */}
 
-                                        <div className="col-md-6">
-
-                                            <div className="bg-light rounded p-3 h-100">
-
-                                                <small className="text-muted d-block mb-1">
-
-                                                    <i className="bi bi-geo-alt me-2"></i>
-
-                                                    Location
-
-                                                </small>
-
-                                                <strong>
-
-                                                    {booking.theatre?.location ||
-                                                        "Unavailable"}
-
-                                                </strong>
-
-                                            </div>
-
-                                        </div>
+                                        <div className="row g-3">
 
 
-                                        {/* Screen */}
+                                            {/* Theatre */}
 
-                                        <div className="col-md-6">
+                                            <div className="col-md-6">
 
-                                            <div className="bg-light rounded p-3 h-100">
+                                                <div
+                                                    className="p-3 h-100"
+                                                    style={{
+                                                        background: "#f8fafc",
+                                                        borderRadius: "10px",
+                                                        border:
+                                                            "1px solid #e2e8f0"
+                                                    }}
+                                                >
 
-                                                <small className="text-muted d-block mb-1">
+                                                    <div
+                                                        style={{
+                                                            color: "#94a3b8",
+                                                            fontSize: "12px",
+                                                            marginBottom: "5px"
+                                                        }}
+                                                    >
 
-                                                    <i className="bi bi-display me-2"></i>
+                                                        <i className="bi bi-building me-2"></i>
 
-                                                    Screen
-
-                                                </small>
-
-                                                <strong>
-
-                                                    {booking.screen?.screenName ||
-                                                        "Unavailable"}
-
-                                                </strong>
-
-                                            </div>
-
-                                        </div>
-
-
-                                        {/* Seats */}
-
-                                        <div className="col-md-6">
-
-                                            <div className="bg-light rounded p-3 h-100">
-
-                                                <small className="text-muted d-block mb-2">
-
-                                                    <i className="bi bi-grid-3x3-gap me-2"></i>
-
-                                                    Seats
-
-                                                </small>
-
-
-                                                {seatNames.length > 0 ? (
-
-                                                    <div className="d-flex flex-wrap gap-2">
-
-                                                        {seatNames.map(
-                                                            (seatNumber) => (
-
-                                                                <span
-                                                                    key={seatNumber}
-                                                                    className="badge bg-primary px-3 py-2"
-                                                                >
-
-                                                                    {seatNumber}
-
-                                                                </span>
-
-                                                            )
-                                                        )}
+                                                        THEATRE
 
                                                     </div>
 
-                                                ) : (
 
-                                                    <strong className="text-muted">
+                                                    <div
+                                                        className="fw-semibold"
+                                                        style={{
+                                                            color: "#334155"
+                                                        }}
+                                                    >
 
-                                                        No seats available
+                                                        {booking.theatre?.name ||
+                                                            "Unavailable"}
 
-                                                    </strong>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+
+                                            {/* Location */}
+
+                                            <div className="col-md-6">
+
+                                                <div
+                                                    className="p-3 h-100"
+                                                    style={{
+                                                        background: "#f8fafc",
+                                                        borderRadius: "10px",
+                                                        border:
+                                                            "1px solid #e2e8f0"
+                                                    }}
+                                                >
+
+                                                    <div
+                                                        style={{
+                                                            color: "#94a3b8",
+                                                            fontSize: "12px",
+                                                            marginBottom: "5px"
+                                                        }}
+                                                    >
+
+                                                        <i className="bi bi-geo-alt me-2"></i>
+
+                                                        LOCATION
+
+                                                    </div>
+
+
+                                                    <div
+                                                        className="fw-semibold"
+                                                        style={{
+                                                            color: "#334155"
+                                                        }}
+                                                    >
+
+                                                        {booking.theatre?.location ||
+                                                            "Unavailable"}
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+
+                                            {/* Screen */}
+
+                                            <div className="col-md-6">
+
+                                                <div
+                                                    className="p-3 h-100"
+                                                    style={{
+                                                        background: "#f8fafc",
+                                                        borderRadius: "10px",
+                                                        border:
+                                                            "1px solid #e2e8f0"
+                                                    }}
+                                                >
+
+                                                    <div
+                                                        style={{
+                                                            color: "#94a3b8",
+                                                            fontSize: "12px",
+                                                            marginBottom: "5px"
+                                                        }}
+                                                    >
+
+                                                        <i className="bi bi-display me-2"></i>
+
+                                                        SCREEN
+
+                                                    </div>
+
+
+                                                    <div
+                                                        className="fw-semibold"
+                                                        style={{
+                                                            color: "#334155"
+                                                        }}
+                                                    >
+
+                                                        {booking.screen?.screenName ||
+                                                            "Unavailable"}
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+
+                                            {/* SEATS */}
+
+                                            <div className="col-md-6">
+
+                                                <div
+                                                    className="p-3 h-100"
+                                                    style={{
+                                                        background: "#f8fafc",
+                                                        borderRadius: "10px",
+                                                        border:
+                                                            "1px solid #e2e8f0"
+                                                    }}
+                                                >
+
+                                                    <div
+                                                        style={{
+                                                            color: "#94a3b8",
+                                                            fontSize: "12px",
+                                                            marginBottom: "8px"
+                                                        }}
+                                                    >
+
+                                                        <i className="bi bi-grid-3x3-gap me-2"></i>
+
+                                                        SEATS
+
+                                                    </div>
+
+
+                                                    {seatNames.length > 0 ? (
+
+                                                        <div className="d-flex flex-wrap gap-2">
+
+                                                            {seatNames.map(
+                                                                (seatNumber) => (
+
+                                                                    <span
+                                                                        key={seatNumber}
+                                                                        style={{
+                                                                            background:
+                                                                                "#eff6ff",
+                                                                            color:
+                                                                                "#2563eb",
+                                                                            border:
+                                                                                "1px solid #bfdbfe",
+                                                                            padding:
+                                                                                "5px 10px",
+                                                                            borderRadius:
+                                                                                "6px",
+                                                                            fontSize:
+                                                                                "13px",
+                                                                            fontWeight:
+                                                                                "600"
+                                                                        }}
+                                                                    >
+
+                                                                        {seatNumber}
+
+                                                                    </span>
+
+                                                                )
+                                                            )}
+
+                                                        </div>
+
+                                                    ) : (
+
+                                                        <span
+                                                            style={{
+                                                                color: "#94a3b8"
+                                                            }}
+                                                        >
+                                                            No seats available
+                                                        </span>
+
+                                                    )}
+
+                                                </div>
+
+                                            </div>
+
+
+                                            {/* DATE */}
+
+                                            <div className="col-md-6">
+
+                                                <div
+                                                    className="p-3"
+                                                    style={{
+                                                        background: "#f8fafc",
+                                                        borderRadius: "10px",
+                                                        border:
+                                                            "1px solid #e2e8f0"
+                                                    }}
+                                                >
+
+                                                    <div
+                                                        style={{
+                                                            color: "#94a3b8",
+                                                            fontSize: "12px",
+                                                            marginBottom: "5px"
+                                                        }}
+                                                    >
+
+                                                        <i className="bi bi-calendar-event me-2"></i>
+
+                                                        SHOW DATE
+
+                                                    </div>
+
+
+                                                    <div
+                                                        className="fw-semibold"
+                                                        style={{
+                                                            color: "#334155"
+                                                        }}
+                                                    >
+
+                                                        {booking.show?.showDate ||
+                                                            "Unavailable"}
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+
+                                            {/* TIME */}
+
+                                            <div className="col-md-6">
+
+                                                <div
+                                                    className="p-3"
+                                                    style={{
+                                                        background: "#f8fafc",
+                                                        borderRadius: "10px",
+                                                        border:
+                                                            "1px solid #e2e8f0"
+                                                    }}
+                                                >
+
+                                                    <div
+                                                        style={{
+                                                            color: "#94a3b8",
+                                                            fontSize: "12px",
+                                                            marginBottom: "5px"
+                                                        }}
+                                                    >
+
+                                                        <i className="bi bi-clock me-2"></i>
+
+                                                        SHOW TIME
+
+                                                    </div>
+
+
+                                                    <div
+                                                        className="fw-semibold"
+                                                        style={{
+                                                            color: "#334155"
+                                                        }}
+                                                    >
+
+                                                        {booking.show?.showTime ||
+                                                            "Unavailable"}
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+
+                                        {/* =================================================
+                                            BOTTOM
+                                        ================================================= */}
+
+                                        <div
+                                            className="mt-4 pt-4 d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3"
+                                            style={{
+                                                borderTop:
+                                                    "1px solid #e2e8f0"
+                                            }}
+                                        >
+
+
+                                            {/* TOTAL */}
+
+                                            <div>
+
+                                                <small
+                                                    style={{
+                                                        color: "#94a3b8",
+                                                        fontSize: "12px"
+                                                    }}
+                                                >
+                                                    TOTAL AMOUNT
+                                                </small>
+
+
+                                                <div
+                                                    className="fw-bold"
+                                                    style={{
+                                                        color: "#16a34a",
+                                                        fontSize: "24px"
+                                                    }}
+                                                >
+
+                                                    ₹{booking.totalAmount}
+
+                                                </div>
+
+                                            </div>
+
+
+                                            {/* BOOKING DATE */}
+
+                                            <div>
+
+                                                <small
+                                                    style={{
+                                                        color: "#94a3b8",
+                                                        fontSize: "12px"
+                                                    }}
+                                                >
+                                                    BOOKED ON
+                                                </small>
+
+
+                                                <div
+                                                    className="fw-semibold"
+                                                    style={{
+                                                        color: "#334155",
+                                                        fontSize: "14px"
+                                                    }}
+                                                >
+
+                                                    {booking.bookingDate
+                                                        ? new Date(
+                                                            booking.bookingDate
+                                                        ).toLocaleString()
+                                                        : "Unavailable"}
+
+                                                </div>
+
+                                            </div>
+
+
+                                            {/* BUTTONS */}
+
+                                            <div
+                                                className="d-flex gap-2 flex-wrap"
+                                            >
+
+                                                {/* VIEW */}
+
+                                                <button
+                                                    className="btn fw-semibold"
+                                                    style={{
+                                                        background:
+                                                            "#2563eb",
+                                                        color: "white",
+                                                        border: "none",
+                                                        borderRadius: "8px",
+                                                        padding:
+                                                            "9px 16px"
+                                                    }}
+                                                    onClick={() =>
+                                                        navigate(
+                                                            "/booking-confirmation",
+                                                            {
+                                                                state: {
+
+                                                                    booking:
+                                                                        booking,
+
+                                                                    selectedSeats:
+                                                                        seatNames
+
+                                                                }
+                                                            }
+                                                        )
+                                                    }
+                                                >
+
+                                                    <i className="bi bi-eye me-2"></i>
+
+                                                    View Booking
+
+                                                </button>
+
+
+                                                {/* CANCEL */}
+
+                                                {isConfirmed && (
+
+                                                    <button
+                                                        className="btn fw-semibold"
+                                                        style={{
+                                                            background:
+                                                                "white",
+                                                            color:
+                                                                "#dc2626",
+                                                            border:
+                                                                "1px solid #fecaca",
+                                                            borderRadius:
+                                                                "8px",
+                                                            padding:
+                                                                "9px 16px"
+                                                        }}
+                                                        onClick={() =>
+                                                            handleCancelBooking(
+                                                                booking.bookingId
+                                                            )
+                                                        }
+                                                        disabled={
+                                                            cancellingId ===
+                                                            booking.bookingId
+                                                        }
+                                                    >
+
+                                                        {cancellingId ===
+                                                        booking.bookingId ? (
+
+                                                            <>
+
+                                                                <span
+                                                                    className="spinner-border spinner-border-sm me-2"
+                                                                ></span>
+
+                                                                Cancelling...
+
+                                                            </>
+
+                                                        ) : (
+
+                                                            <>
+
+                                                                <i className="bi bi-x-circle me-2"></i>
+
+                                                                Cancel
+
+                                                            </>
+
+                                                        )}
+
+                                                    </button>
 
                                                 )}
 
@@ -611,194 +1119,15 @@ export default function MyBookings() {
 
                                         </div>
 
-
-                                        {/* Date */}
-
-                                        <div className="col-md-6">
-
-                                            <div className="bg-light rounded p-3">
-
-                                                <small className="text-muted d-block mb-1">
-
-                                                    <i className="bi bi-calendar-event me-2"></i>
-
-                                                    Show Date
-
-                                                </small>
-
-                                                <strong>
-
-                                                    {booking.show?.showDate ||
-                                                        "Unavailable"}
-
-                                                </strong>
-
-                                            </div>
-
-                                        </div>
-
-
-                                        {/* Time */}
-
-                                        <div className="col-md-6">
-
-                                            <div className="bg-light rounded p-3">
-
-                                                <small className="text-muted d-block mb-1">
-
-                                                    <i className="bi bi-clock me-2"></i>
-
-                                                    Show Time
-
-                                                </small>
-
-                                                <strong>
-
-                                                    {booking.show?.showTime ||
-                                                        "Unavailable"}
-
-                                                </strong>
-
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-
-                                    <hr className="my-4" />
-
-
-                                    {/* Bottom Section */}
-
-                                    <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
-
-
-                                        {/* Amount */}
-
-                                        <div>
-
-                                            <small className="text-muted d-block">
-                                                Total Amount
-                                            </small>
-
-                                            <h4 className="fw-bold text-success mb-0">
-
-                                                ₹{booking.totalAmount}
-
-                                            </h4>
-
-                                        </div>
-
-
-                                        {/* Booking Date */}
-
-                                        <div>
-
-                                            <small className="text-muted d-block">
-                                                Booking Date
-                                            </small>
-
-                                            <strong>
-
-                                                {booking.bookingDate
-                                                    ? new Date(
-                                                        booking.bookingDate
-                                                    ).toLocaleString()
-                                                    : "Unavailable"}
-
-                                            </strong>
-
-                                        </div>
-
-
-                                        {/* Buttons */}
-
-                                        <div className="d-flex gap-2">
-
-
-                                            {/* View Booking */}
-
-                                            <button
-                                                className="btn btn-primary"
-                                                onClick={() =>
-                                                    navigate(
-                                                        "/booking-confirmation",
-                                                        {
-                                                            state: {
-
-                                                                booking:
-                                                                    booking,
-
-                                                                selectedSeats:
-                                                                    seatNames
-
-                                                            }
-                                                        }
-                                                    )
-                                                }
-                                            >
-
-                                                <i className="bi bi-eye me-2"></i>
-
-                                                View Booking
-
-                                            </button>
-
-
-                                            {/* Cancel */}
-
-                                            {isConfirmed && (
-
-                                                <button
-                                                    className="btn btn-outline-danger"
-                                                    onClick={() =>
-                                                        handleCancelBooking(
-                                                            booking.bookingId
-                                                        )
-                                                    }
-                                                    disabled={
-                                                        cancellingId ===
-                                                        booking.bookingId
-                                                    }
-                                                >
-
-                                                    {cancellingId ===
-                                                    booking.bookingId ? (
-
-                                                        <>
-                                                            <span
-                                                                className="spinner-border spinner-border-sm me-2"
-                                                            ></span>
-
-                                                            Cancelling...
-                                                        </>
-
-                                                    ) : (
-
-                                                        <>
-                                                            <i className="bi bi-x-circle me-2"></i>
-
-                                                            Cancel
-                                                        </>
-
-                                                    )}
-
-                                                </button>
-
-                                            )}
-
-                                        </div>
-
                                     </div>
 
                                 </div>
 
-                            </div>
+                            );
 
-                        );
+                        })}
 
-                    })}
+                    </div>
 
                 </div>
 

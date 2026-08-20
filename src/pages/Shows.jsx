@@ -11,9 +11,9 @@ export default function Shows() {
     const [loading, setLoading] = useState(true);
 
 
-    // -----------------------------------------
-    // Get Shows
-    // -----------------------------------------
+    // =====================================================
+    // GET SHOWS
+    // =====================================================
 
     useEffect(() => {
 
@@ -51,25 +51,45 @@ export default function Shows() {
     }, [movieId]);
 
 
-    // -----------------------------------------
-    // Loading
-    // -----------------------------------------
+    // =====================================================
+    // LOADING
+    // =====================================================
 
     if (loading) {
 
         return (
 
-            <div className="container mt-5 text-center">
+            <div
+                style={{
+                    minHeight: "100vh",
+                    background: "#f8fafc"
+                }}
+                className="d-flex justify-content-center align-items-center"
+            >
 
-                <div
-                    className="spinner-border text-primary"
-                    role="status"
-                >
+                <div className="text-center">
+
+                    <div
+                        className="spinner-border"
+                        style={{
+                            color: "#dc2626",
+                            width: "2.8rem",
+                            height: "2.8rem"
+                        }}
+                        role="status"
+                    >
+                    </div>
+
+                    <p
+                        className="mt-3 mb-0"
+                        style={{
+                            color: "#64748b"
+                        }}
+                    >
+                        Loading available shows...
+                    </p>
+
                 </div>
-
-                <p className="mt-3 text-muted">
-                    Loading shows...
-                </p>
 
             </div>
 
@@ -78,126 +98,254 @@ export default function Shows() {
     }
 
 
-    // -----------------------------------------
-    // Page
-    // -----------------------------------------
+    // =====================================================
+    // PAGE
+    // =====================================================
 
     return (
 
-        <div className="container mt-5 mb-5">
+        <div
+            style={{
+                minHeight: "100vh",
+                background: "#f8fafc",
+                paddingTop: "45px",
+                paddingBottom: "70px"
+            }}
+        >
+
+            <div className="container">
 
 
-            {/* Page Heading */}
+                {/* =================================================
+                    HEADER
+                ================================================= */}
 
-            <div className="text-center mb-5">
+                <div className="text-center mb-5">
 
-                <h2 className="fw-bold">
-                    🎟️ Available Shows
-                </h2>
-
-                <p className="text-muted">
-                    Select a showtime to continue booking
-                </p>
-
-            </div>
-
-
-            {/* No Shows */}
-
-            {shows.length === 0 ? (
-
-                <div className="text-center py-5">
-
-                    <div
-                        className="mb-3"
+                    <span
+                        className="badge px-3 py-2 mb-3"
                         style={{
-                            fontSize: "50px"
+                            background: "#fee2e2",
+                            color: "#dc2626",
+                            fontSize: "12px",
+                            letterSpacing: "1px",
+                            borderRadius: "20px"
                         }}
                     >
-                        🎬
-                    </div>
 
-                    <h4 className="fw-bold">
-                        No Shows Available
-                    </h4>
+                        SHOWTIMES
 
-                    <p className="text-muted">
-                        There are currently no shows
-                        available for this movie.
-                    </p>
+                    </span>
 
-                    <button
-                        className="btn btn-outline-primary"
-                        onClick={() => navigate("/movies")}
+
+                    <h1
+                        className="fw-bold mb-2"
+                        style={{
+                            color: "#1e293b",
+                            fontSize: "36px"
+                        }}
                     >
-                        <i className="bi bi-arrow-left me-2"></i>
-                        Back to Movies
-                    </button>
+
+                        🎟️ Available Shows
+
+                    </h1>
+
+
+                    <p
+                        className="mb-0"
+                        style={{
+                            color: "#64748b",
+                            fontSize: "16px"
+                        }}
+                    >
+
+                        Choose a date and showtime to continue booking
+
+                    </p>
 
                 </div>
 
-            ) : (
 
-                <div className="row g-4">
+                {/* =================================================
+                    NO SHOWS
+                ================================================= */}
 
-                    {shows.map((show) => (
+                {shows.length === 0 ? (
+
+                    <div
+                        className="text-center mx-auto"
+                        style={{
+                            maxWidth: "550px",
+                            padding: "50px 20px"
+                        }}
+                    >
 
                         <div
-                            className="col-xl-4 col-lg-4 col-md-6"
-                            key={show.showId}
+                            className="mx-auto mb-4 d-flex justify-content-center align-items-center"
+                            style={{
+                                width: "85px",
+                                height: "85px",
+                                borderRadius: "50%",
+                                background: "#fee2e2",
+                                color: "#dc2626",
+                                fontSize: "38px"
+                            }}
                         >
 
+                            <i className="bi bi-film"></i>
+
+                        </div>
+
+
+                        <h3
+                            className="fw-bold"
+                            style={{
+                                color: "#1e293b"
+                            }}
+                        >
+
+                            No Shows Available
+
+                        </h3>
+
+
+                        <p
+                            style={{
+                                color: "#64748b"
+                            }}
+                        >
+
+                            There are currently no shows available
+                            for this movie.
+
+                        </p>
+
+
+                        <button
+                            className="btn fw-semibold px-4 mt-2"
+                            style={{
+                                background: "#dc2626",
+                                color: "white",
+                                border: "none",
+                                borderRadius: "8px"
+                            }}
+                            onClick={() => navigate("/movies")}
+                        >
+
+                            <i className="bi bi-arrow-left me-2"></i>
+
+                            Back to Movies
+
+                        </button>
+
+                    </div>
+
+                ) : (
+
+
+                    /* =================================================
+                       SHOW GRID
+                    ================================================= */
+
+                    <div className="row g-4">
+
+                        {shows.map((show) => (
+
                             <div
-                                className="card h-100 border-0 shadow-sm"
-                                style={{
-                                    borderRadius: "15px",
-                                    transition:
-                                        "transform 0.2s, box-shadow 0.2s"
-                                }}
-
-                                onMouseEnter={(e) => {
-
-                                    e.currentTarget.style.transform =
-                                        "translateY(-5px)";
-
-                                    e.currentTarget.style.boxShadow =
-                                        "0 10px 25px rgba(0,0,0,0.15)";
-
-                                }}
-
-                                onMouseLeave={(e) => {
-
-                                    e.currentTarget.style.transform =
-                                        "translateY(0)";
-
-                                    e.currentTarget.style.boxShadow =
-                                        "0 .125rem .25rem rgba(0,0,0,.075)";
-
-                                }}
+                                className="col-xl-4 col-lg-4 col-md-6"
+                                key={show.showId}
                             >
 
-
-                                {/* Card Header */}
-
                                 <div
-                                    className="card-header bg-primary text-white border-0"
+                                    className="h-100"
                                     style={{
-                                        borderRadius:
-                                            "15px 15px 0 0"
+                                        background: "white",
+                                        borderRadius: "16px",
+                                        border:
+                                            "1px solid #e2e8f0",
+                                        boxShadow:
+                                            "0 4px 15px rgba(15,23,42,0.06)",
+                                        overflow: "hidden",
+                                        transition:
+                                            "transform 0.25s ease, box-shadow 0.25s ease"
+                                    }}
+
+                                    onMouseEnter={(e) => {
+
+                                        e.currentTarget.style.transform =
+                                            "translateY(-6px)";
+
+                                        e.currentTarget.style.boxShadow =
+                                            "0 12px 28px rgba(15,23,42,0.12)";
+
+                                    }}
+
+                                    onMouseLeave={(e) => {
+
+                                        e.currentTarget.style.transform =
+                                            "translateY(0)";
+
+                                        e.currentTarget.style.boxShadow =
+                                            "0 4px 15px rgba(15,23,42,0.06)";
+
                                     }}
                                 >
 
-                                    <div className="d-flex justify-content-between align-items-center">
 
-                                        <span className="fw-semibold">
+                                    {/* =================================================
+                                        CARD TOP
+                                    ================================================= */}
 
-                                            <i className="bi bi-film me-2"></i>
+                                    <div
+                                        className="px-4 py-3 d-flex justify-content-between align-items-center"
+                                        style={{
+                                            background: "#fff",
+                                            borderBottom:
+                                                "1px solid #e2e8f0"
+                                        }}
+                                    >
 
-                                            Show #{show.showId}
+                                        <div>
 
-                                        </span>
+                                            <small
+                                                style={{
+                                                    color: "#94a3b8",
+                                                    fontSize: "11px",
+                                                    letterSpacing: "0.8px"
+                                                }}
+                                            >
 
-                                        <span className="badge bg-light text-primary">
+                                                SHOW
+
+                                            </small>
+
+
+                                            <div
+                                                className="fw-bold"
+                                                style={{
+                                                    color: "#334155"
+                                                }}
+                                            >
+
+                                                #{show.showId}
+
+                                            </div>
+
+                                        </div>
+
+
+                                        <span
+                                            style={{
+                                                background: "#dcfce7",
+                                                color: "#15803d",
+                                                padding: "6px 11px",
+                                                borderRadius: "20px",
+                                                fontSize: "12px",
+                                                fontWeight: "600"
+                                            }}
+                                        >
+
+                                            <i className="bi bi-check-circle me-1"></i>
 
                                             Available
 
@@ -205,150 +353,254 @@ export default function Shows() {
 
                                     </div>
 
-                                </div>
+
+                                    {/* =================================================
+                                        CARD BODY
+                                    ================================================= */}
+
+                                    <div className="p-4">
 
 
-                                {/* Card Body */}
-
-                                <div className="card-body p-4">
-
-
-                                    {/* Date */}
-
-                                    <div className="d-flex align-items-center mb-4">
+                                        {/* DATE */}
 
                                         <div
-                                            className="bg-light rounded p-3 me-3"
-                                            style={{
-                                                fontSize: "24px"
-                                            }}
+                                            className="d-flex align-items-center mb-4"
                                         >
-                                            📅
+
+                                            <div
+                                                className="d-flex justify-content-center align-items-center me-3"
+                                                style={{
+                                                    width: "48px",
+                                                    height: "48px",
+                                                    borderRadius: "10px",
+                                                    background: "#eff6ff",
+                                                    color: "#2563eb",
+                                                    fontSize: "21px"
+                                                }}
+                                            >
+
+                                                <i className="bi bi-calendar-event"></i>
+
+                                            </div>
+
+
+                                            <div>
+
+                                                <small
+                                                    className="d-block"
+                                                    style={{
+                                                        color: "#94a3b8",
+                                                        fontSize: "12px"
+                                                    }}
+                                                >
+
+                                                    SHOW DATE
+
+                                                </small>
+
+
+                                                <strong
+                                                    style={{
+                                                        color: "#334155"
+                                                    }}
+                                                >
+
+                                                    {show.showDate}
+
+                                                </strong>
+
+                                            </div>
+
                                         </div>
 
-                                        <div>
 
-                                            <small className="text-muted d-block">
-                                                Show Date
-                                            </small>
-
-                                            <strong>
-                                                {show.showDate}
-                                            </strong>
-
-                                        </div>
-
-                                    </div>
-
-
-                                    {/* Time */}
-
-                                    <div className="d-flex align-items-center mb-4">
+                                        {/* TIME */}
 
                                         <div
-                                            className="bg-light rounded p-3 me-3"
-                                            style={{
-                                                fontSize: "24px"
-                                            }}
+                                            className="d-flex align-items-center mb-4"
                                         >
-                                            🕐
+
+                                            <div
+                                                className="d-flex justify-content-center align-items-center me-3"
+                                                style={{
+                                                    width: "48px",
+                                                    height: "48px",
+                                                    borderRadius: "10px",
+                                                    background: "#fef3c7",
+                                                    color: "#d97706",
+                                                    fontSize: "21px"
+                                                }}
+                                            >
+
+                                                <i className="bi bi-clock"></i>
+
+                                            </div>
+
+
+                                            <div>
+
+                                                <small
+                                                    className="d-block"
+                                                    style={{
+                                                        color: "#94a3b8",
+                                                        fontSize: "12px"
+                                                    }}
+                                                >
+
+                                                    SHOW TIME
+
+                                                </small>
+
+
+                                                <strong
+                                                    style={{
+                                                        color: "#334155",
+                                                        fontSize: "18px"
+                                                    }}
+                                                >
+
+                                                    {show.showTime}
+
+                                                </strong>
+
+                                            </div>
+
                                         </div>
 
-                                        <div>
 
-                                            <small className="text-muted d-block">
-                                                Show Time
-                                            </small>
-
-                                            <strong>
-                                                {show.showTime}
-                                            </strong>
-
-                                        </div>
-
-                                    </div>
-
-
-                                    {/* Ticket Price */}
-
-                                    <div className="d-flex align-items-center mb-4">
+                                        {/* PRICE */}
 
                                         <div
-                                            className="bg-light rounded p-3 me-3"
-                                            style={{
-                                                fontSize: "24px"
-                                            }}
+                                            className="d-flex align-items-center mb-4"
                                         >
-                                            🎟️
+
+                                            <div
+                                                className="d-flex justify-content-center align-items-center me-3"
+                                                style={{
+                                                    width: "48px",
+                                                    height: "48px",
+                                                    borderRadius: "10px",
+                                                    background: "#ecfdf5",
+                                                    color: "#16a34a",
+                                                    fontSize: "21px"
+                                                }}
+                                            >
+
+                                                <i className="bi bi-ticket-perforated"></i>
+
+                                            </div>
+
+
+                                            <div>
+
+                                                <small
+                                                    className="d-block"
+                                                    style={{
+                                                        color: "#94a3b8",
+                                                        fontSize: "12px"
+                                                    }}
+                                                >
+
+                                                    STARTING FROM
+
+                                                </small>
+
+
+                                                <strong
+                                                    style={{
+                                                        color: "#16a34a",
+                                                        fontSize: "20px"
+                                                    }}
+                                                >
+
+                                                    ₹{show.ticketPrice}
+
+                                                </strong>
+
+                                            </div>
+
                                         </div>
 
-                                        <div>
 
-                                            <small className="text-muted d-block">
-                                                Ticket Price starting from
-                                            </small>
+                                        {/* DIVIDER */}
 
-                                            <strong className="text-success">
+                                        <hr
+                                            style={{
+                                                borderColor: "#e2e8f0"
+                                            }}
+                                        />
 
-                                                ₹{show.ticketPrice}
 
-                                            </strong>
+                                        {/* SELECT SEATS */}
 
-                                        </div>
+                                        <button
+                                            className="btn w-100 fw-semibold py-2"
+                                            style={{
+                                                background: "#dc2626",
+                                                color: "white",
+                                                border: "none",
+                                                borderRadius: "8px"
+                                            }}
+                                            onClick={() =>
+                                                navigate(
+                                                    `/seats/${show.showId}`
+                                                )
+                                            }
+                                        >
+
+                                            <i className="bi bi-grid-3x3-gap-fill me-2"></i>
+
+                                            Select Seats
+
+                                            <i className="bi bi-arrow-right ms-2"></i>
+
+                                        </button>
 
                                     </div>
-
-
-                                    {/* Select Seats Button */}
-
-                                    <button
-                                        className="btn btn-primary w-100 fw-semibold py-2"
-                                        onClick={() =>
-                                            navigate(
-                                                `/seats/${show.showId}`
-                                            )
-                                        }
-                                    >
-
-                                        <i className="bi bi-grid-3x3-gap-fill me-2"></i>
-
-                                        Select Seats
-
-                                    </button>
 
                                 </div>
 
                             </div>
 
-                        </div>
+                        ))}
 
-                    ))}
+                    </div>
 
-                </div>
-
-            )}
+                )}
 
 
-            {/* Back Button */}
+                {/* =================================================
+                    BACK TO MOVIES
+                ================================================= */}
 
-            {shows.length > 0 && (
+                {shows.length > 0 && (
 
-                <div className="text-center mt-5">
+                    <div className="text-center mt-5">
 
-                    <button
-                        className="btn btn-outline-secondary"
-                        onClick={() => navigate("/movies")}
-                    >
+                        <button
+                            className="btn fw-semibold"
+                            style={{
+                                background: "white",
+                                color: "#475569",
+                                border:
+                                    "1px solid #cbd5e1",
+                                borderRadius: "8px",
+                                padding: "9px 18px"
+                            }}
+                            onClick={() => navigate("/movies")}
+                        >
 
-                        <i className="bi bi-arrow-left me-2"></i>
+                            <i className="bi bi-arrow-left me-2"></i>
 
-                        Back to Movies
+                            Back to Movies
 
-                    </button>
+                        </button>
 
-                </div>
+                    </div>
 
-            )}
+                )}
+
+            </div>
 
         </div>
 
